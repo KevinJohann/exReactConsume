@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import NavBar from './components/nav-bar';
+import Header from './components/header';
+import MusicContainer from './components/music-container';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            filter: 'any',
+        };
+    }
+
+    render() {
+        return (
+            <div className="w-100 vh-100">
+                <NavBar 
+                filter={this.state.filter}
+                changeCategory={(name) => this.changeCategory(name)}/>
+                <div className="w-81 d-inline-block float-right vh-100">
+                    <Header/>
+                    <MusicContainer
+                    filter={this.state.filter}/>
+                </div>
+                
+
+            </div>
+        );
+    }
+
+    changeCategory(name){
+        this.setState({
+            filter: name,
+        });
+        console.log(this.state.filter);
+    }
 }
 
 export default App;
